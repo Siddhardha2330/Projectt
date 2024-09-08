@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Open+Sans:wght@400&display=swap">
+    <title>Virtual Herbal Garden</title>
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F7F2E7;
+            color: #333;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2E8B57;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-logo img {
+            width: 60px;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .navbar-links li {
+            display: inline;
+        }
+
+        .navbar-links li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar-links li a:hover {
+            background-color: #3CB371;
+        }
+
+        .navbar-login .btn-login, .navbar-login .btn-signup {
+            color: #fff;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-login .btn-login {
+            background-color: transparent;
+            border: 2px solid #fff;
+        }
+
+        .navbar-login .btn-login:hover {
+            background-color: #fff;
+            color: #2E8B57;
+        }
+
+        .navbar-login .btn-signup {
+            background-color: #E2C275;
+            border: 2px solid #E2C275;
+        }
+
+        .navbar-login .btn-signup:hover {
+            background-color: #fff;
+            color: #E2C275;
+        }
+
+        /* Search Filter Styles */
+        .search-filter {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            gap: 20px;
+        }
+
+        .search-filter input, .search-filter select {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #4B7F52;
+            border-radius: 8px;
+            width: 250px;
+        }
+
+        /* Image Grid */
+        .image-block-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .image-block {
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .image-block img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .image-block:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-block:hover {
+            transform: translateY(-5px);
+        }
+
+        .head {
+            font-family: 'Lora', serif;
+            font-size: 20px;
+            margin-top: 15px;
+            color: #2E8B57;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #2E8B57;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-links {
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 15px;
+            }
+
+            .navbar-login {
+                margin-top: 10px;
+            }
+
+            .image-block-container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .search-filter {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .navbar {
+                padding: 15px;
+            }
+
+            .navbar-links li a {
+                font-size: 16px;
+            }
+
+            .search-filter input, .search-filter select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <img src="c:\Users\dell\Downloads\logo-white.png" alt="Virtual Herbal Garden Logo">
+            </div>
+            <ul class="navbar-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#herbs">Herbs</a></li>
+                <li><a href="#garden-plans">Garden Plans</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="navbar-login">
+                <a href="#login" class="btn-login">Login</a>
+                <a href="#signup" class="btn-signup">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="search-filter">
+        <input type="text" id="search" placeholder="Search herbs...">
+        <select id="filter">
+            <option value="">Filter by Type</option>
+            <option value="medicinal">Medicinal</option>
+            <option value="culinary">Culinary</option>
+            <option value="aromatic">Aromatic</option>
+        </select>
+    </section>
+
+    <div class="image-block-container">
+        <!-- Image blocks with individual content -->
+        <div class="image-block">
+            <h3 class="head">Meadow Plant Mint</h3>
+            <a href="page1.html">
+                <img src="https://img-new.cgtrader.com/items/3400981/c3e51fd250/meadow-plant-mint-3d-model-max-obj-fbx-c4d-blend-uasset.jpg" alt="Meadow Plant Mint">
+            </a>
+        </div>
+        <div class="image-block">
+            <h3 class="head">Mentha</h3>
+            <a href="page2.html">
+                <img src="https://img-new.cgtrader.com/items/3720816/b6dfee4b89/mint-herbs-3d-model-b6dfee4b89.jpg" alt="Mentha">
+            </a>
+        </div>
+        <!-- Additional image blocks... -->
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Virtual Herbal Garden | Designed for Ayurvedic Well-being</p>
+    </footer>
+
+    <script>
+      // Search Filter Functionality
+      document.getElementById('search').addEventListener('input', function() {
+        let searchValue = this.value.toLowerCase();
+        let imageBlocks = document.querySelectorAll('.image-block');
+
+        imageBlocks.forEach(function(block) {
+            let altText = block.querySelector('img').alt.toLowerCase();
+            if (altText.includes(searchValue)) {
+                block.style.display = 'block';
+            } else {
+                block.style.display = 'none';
+            }
+        });
+    });
+
+    // Dropdown Filter Functionality
+    document.getElementById('filter').addEventListener('change', function() {
+        let filterValue = this.value.toLowerCase();
+        let imageBlocks = document.querySelectorAll('.image-block');
+
+        imageBlocks.forEach(function(block) {
+            let altText = block.querySelector('img').alt.toLowerCase();
+            if (filterValue === "" || altText.includes(filterValue)) {
+                block.style.display = 'block';
+            } else {
+                block.style.display = 'none';
+            }
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herb Details</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4ed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            height: 100%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .image-section {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 100%;
+        }
+
+        .slider img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .slide-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-100%);
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
+        .info-section {
+            width: 50%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .info-section h1 {
+            margin-bottom: 20px;
+            font-size: 36px;
+            color: #2e8b57;
+        }
+
+        .info-section p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .info-section h2 {
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #3cb371;
+        }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .info-section ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .info-section ul li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: #2e8b57;
+        }
+
+        .zoom-controls {
+            margin-top: 20px;
+        }
+
+        .zoom-controls button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #3cb371;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .zoom-controls button:hover {
+            background-color: #2e8b57;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section">
+            <div class="slider" id="slider">
+                <img src="https://via.placeholder.com/500x500?text=Image+1" alt="Image 1">
+                <img src="https://via.placeholder.com/500x500?text=Image+2" alt="Image 2">
+                <img src="https://via.placeholder.com/500x500?text=Image+3" alt="Image 3">
+            </div>
+            <button class="slide-btn prev-btn" onclick="prevSlide()">&#10094;</button>
+            <button class="slide-btn next-btn" onclick="nextSlide()">&#10095;</button>
+        </div>
+        <div class="info-section">
+            <h1>Herb Name</h1>
+            <p>Aloe Vera</p>
+            <h2>Benefits</h2>
+            <ul>
+                <li>Digestive Aid</li>
+                <li>Respiratory Relief</li>
+                <li>Headache Relief</li>
+            </ul>
+            <h2>How to Use</h2>
+            <p>Tea, Steam Inhalation, Garnish, Cooking</p>
+            <div class="zoom-controls">
+                <button onclick="zoomIn()">Zoom In</button>
+                <button onclick="zoomOut()">Zoom Out</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slider img');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            const slider = document.getElementById('slider');
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+    </script>
+</body>
+</html>
