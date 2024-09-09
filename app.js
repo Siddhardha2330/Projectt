@@ -1,27 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const ejs = require('ejs');
+const path = require('path');
 const db = require('./db');  // Import your database connection
+
 const app = express();
 const port = 3000;
 
-// Middleware to parse JSON bodies
+// Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Set up EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 // Serve the signup form
 app.get('/signup', (req, res) => {
-  res.send(`
-    <form action="/signup" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required><br><br>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required><br><br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required><br><br>
-      <button type="submit">Sign Up</button>
-    </form>
-  `);
+  res.render('signup');
 });
 
 // Handle signup form submission
@@ -55,15 +52,7 @@ app.post('/signup', (req, res) => {
 
 // Serve the login form
 app.get('/login', (req, res) => {
-  res.send(`
-    <form action="/login" method="POST">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required><br><br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required><br><br>
-      <button type="submit">Login</button>
-    </form>
-  `);
+  res.render('login');
 });
 
 // Handle login form submission
@@ -87,19 +76,14 @@ app.post('/login', (req, res) => {
 
     const user = results[0];
 
-    // Compare the password with the hashed password stored in the database
     bcrypt.compare(password, user.password, (err, isMatch) => {
-      console.log(password, user.password);
       if (err) {
         console.error('Error comparing passwords:', err);
         return res.status(500).send('Internal Server Error');
       }
 
       if (isMatch) {
-        res.send(`
-          <h1>Login Successful</h1>
-          <p>Welcome back, ${user.name}!</p>
-        `);
+        res.render('home');
       } else {
         res.status(401).send('Incorrect password.');
       }
