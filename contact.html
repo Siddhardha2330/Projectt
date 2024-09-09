@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Virtual Herbal Garden</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            overflow: hidden;
+            padding: 2rem;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .contact-info {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .contact-info p {
+            margin: 0.5rem 0;
+            color: #555;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form input, form textarea {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 1rem;
+            font-size: 1.2rem;
+        }
+        form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Contact Us</h1>
+        <div class="contact-info">
+            <p><strong>Phone Number:</strong> 7075311017</p>
+            <p><strong>Email:</strong> rohithkota4385@gmail.com</p>
+            <p><strong>Location:</strong> Bhimavaram</p>
+        </div>
+
+        <form action="/submit_form" method="post">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="tel" name="phone" placeholder="Phone Number">
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="company" placeholder="Company">
+            <input type="text" name="subject" placeholder="Subject" required>
+            <textarea name="question" placeholder="Question" rows="5" required></textarea>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</body>
+</html>
