@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Virtual Herbal Garden</title>
+  <style>
+  /* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  animation: fadeIn 2s ease-in;
+}
+
+.header {
+  background-image: url('URL-to-header-background-image.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 60px 20px;
+  color: white;
+  text-align: center;
+  position: relative;
+  animation: slideDown 1.5s ease-out;
+}
+
+.header h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.header p {
+  font-size: 1.2em;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+.about-ayush {
+  background-color: #ffffff;
+  padding: 30px;
+  margin: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1.8s ease-in;
+  transition: transform 0.3s ease-in-out;
+}
+
+.about-ayush:hover {
+  transform: scale(1.05);
+}
+
+.about-ayush h2 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: #006400;
+  text-align: center;
+  animation: fadeIn 2s ease-in;
+}
+
+.ayush-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  animation: fadeIn 2.5s ease-in;
+}
+
+.ayush-item {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  animation: zoomIn 2s ease;
+}
+
+.ayush-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.ayush-item h3 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  color: #4b0082;
+  text-align: center;
+  animation: fadeInUp 1s ease-out;
+}
+
+.ayush-item p {
+  font-size: 1em;
+  line-height: 1.6;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  margin-top: 20px;
+  border-radius: 5px;
+  animation: fadeIn 3s ease-in;
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+    </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Welcome to Our Virtual Herbal Garden</h1>
+      <p>Bringing the wisdom of ancient healing practices to the digital age.</p>
+    </header>
+
+    <section class="about-ayush">
+      <h2>What is AYUSH?</h2>
+      <p>AYUSH stands for <strong>Ayurveda, Yoga & Naturopathy, Unani, Siddha, and Homeopathy</strong> — traditional systems of medicine practiced in India for centuries. Each of these systems offers unique perspectives on health, wellness, and natural healing, complementing modern medicine.</p>
+    </section>
+
+    <section class="ayush-sections">
+      <div class="ayush-item">
+        <h3>Ayurveda: The Science of Life</h3>
+        <p>Ayurveda is a holistic system of medicine that focuses on balance in the body, mind, and spirit, using natural remedies, diet, and lifestyle changes.</p>
+      </div>
+
+      <div class="ayush-item">
+        <h3>Yoga: Union of Body and Mind</h3>
+        <p>Yoga is a spiritual and ascetic discipline that includes breath control, meditation, and specific bodily postures for health and relaxation.</p>
+      </div>
+
+      <div class="ayush-item">
+        <h3>Unani: The Art of Healing</h3>
+        <p>Unani medicine is based on the principles of four humors and provides natural treatments with herbs, minerals, and animal products.</p>
+      </div>
+
+      <div class="ayush-item">
+        <h3>Siddha: The Ancient Medical System</h3>
+        <p>Siddha medicine is a traditional medicine originating from Tamil Nadu in India that emphasizes natural healing methods and herbal medicine.</p>
+      </div>
+
+      <div class="ayush-item">
+        <h3>Homeopathy: The Gentle Healing</h3>
+        <p>Homeopathy is a system of alternative medicine based on the principle of 'like cures like,' using highly diluted substances to trigger the body’s natural healing.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2024 Virtual Herbal Garden. All Rights Reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
