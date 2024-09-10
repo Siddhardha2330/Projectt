@@ -11,7 +11,7 @@ const port = 3000;
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.static(path.join(__dirname, 'public')));
 // Set up EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -20,7 +20,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.get('/signup', (req, res) => {
   res.render('signup');
 });
-
+app.get('/quiz', (req, res) => {
+  res.render('quiz');
+});
 // Handle signup form submission
 app.post('/signup', (req, res) => {
   const { name, email, password } = req.body;
@@ -41,14 +43,11 @@ app.post('/signup', (req, res) => {
         console.error('Error inserting user into the database:', err);
         return res.status(500).send('Internal Server Error');
       }
-      res.send(`
-        <h1>Signup Successful</h1>
-        <p>Name: ${name}</p>
-        <p>Email: ${email}</p>
-      `);
+    res.redirect("/login");
     });
   });
 });
+
 
 // Serve the login form
 app.get('/login', (req, res) => {
@@ -83,14 +82,46 @@ app.post('/login', (req, res) => {
       }
 
       if (isMatch) {
-        res.render('home');
+        res.redirect('/home');
       } else {
         res.status(401).send('Incorrect password.');
       }
     });
   });
 });
+app.get('/home', (req, res) => {
+  const query = 'SELECT herb_id, name, photo1 FROM herbs';
 
+  db.query(query, (err, results) => {
+      if (err) {
+          console.error('Error fetching herbs:', err);
+          return res.status(500).send('Internal Server Error');
+      }
+console.log(results);
+      // Render the home page with list of herbs
+      res.render('home', { herbs: results });
+  });
+});
+app.get('/herb/:id', (req, res) => {
+  const herbId = req.params.id;
+
+  const query = 'SELECT * FROM herbs WHERE herb_id = ?';
+  db.query(query, [herbId], (err, results) => {
+      if (err) {
+          console.error('Error fetching herb details:', err);
+          return res.status(500).send('Internal Server Error');
+      }
+
+      if (results.length === 0) {
+          return res.status(404).send('Herb not found');
+      }
+console.log(results);
+      const herb = results[0];
+console.log(herb.photo2);
+      // Render the detailed herb page
+      res.render('page', { herb });
+  });
+});
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

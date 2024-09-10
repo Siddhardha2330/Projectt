@@ -125,9 +125,7 @@
             transition: transform 0.3s;
         }
 
-        .image-block:hover img {
-            transform: scale(1.1);
-        }
+        
 
         .image-block:hover {
             transform: translateY(-5px);
@@ -201,7 +199,7 @@
             <ul class="navbar-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About Us</a></li>
-                <li><a href="#herbs">Herbs</a></li>
+                <li><a href="/quiz">quiz</a></li>
                 <li><a href="#garden-plans">Garden Plans</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -223,20 +221,14 @@
     </section>
 
     <div class="image-block-container">
-        <!-- Image blocks with individual content -->
-        <div class="image-block">
-            <h3 class="head">Meadow Plant Mint</h3>
-            <a href="page1.html">
-                <img src="https://img-new.cgtrader.com/items/3400981/c3e51fd250/meadow-plant-mint-3d-model-max-obj-fbx-c4d-blend-uasset.jpg" alt="Meadow Plant Mint">
-            </a>
-        </div>
-        <div class="image-block">
-            <h3 class="head">Mentha</h3>
-            <a href="page2.html">
-                <img src="https://img-new.cgtrader.com/items/3720816/b6dfee4b89/mint-herbs-3d-model-b6dfee4b89.jpg" alt="Mentha">
-            </a>
-        </div>
-        <!-- Additional image blocks... -->
+        <% herbs.forEach(function(herb) { %>
+            <div class="image-block">
+                <h3><%= herb.name %></h3>
+                <a href="/herb/<%= herb.herb_id %>">
+                    <img src="<%= herb.photo1 %>" alt="<%= herb.name %>">
+                </a>
+            </div>
+        <% }); %>
     </div>
 
     <footer>

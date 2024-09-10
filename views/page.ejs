@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= herb.name %> Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4ed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            height: 100%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: #fff;
+        }
+        .image-section {
+            width: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .image-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .info-section {
+            width: 50%;
+            padding: 30px;
+            background-color: #ffffff;
+            color: #333;
+        }
+        .info-section h1 {
+            font-size: 36px;
+            color: #2e8b57;
+        }
+        .info-section h2 {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #3cb371;
+        }
+        .info-section p, ul {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        ul li::before {
+            content: "✔";
+            padding-right: 10px;
+            color: #2e8b57;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section">
+            <div>
+                <img src="/<%= herb.photo1 %>" alt="<%= herb.name %>">
+                <img src="/<%= herb.photo2 %>" alt="<%= herb.name %>">
+            </div>
+        </div>
+        <div class="info-section">
+            <h1><%= herb.name %> (<i><%= herb.scientific_name %></i>)</h1>
+            <p><%= herb.description %></p>
+            <h2>Uses</h2>
+            <p><%= herb.uses %></p>
+            <h2>Active Compounds</h2>
+            <p><%= herb.active_compounds %></p>
+            <h2>Precautions</h2>
+            <p><%= herb.precautions %></p>
+            <h2>Cures</h2>
+            <p><%= herb.cure %></p>
+            <h2>Season</h2>
+            <p><%= herb.season %></p>
+        </div>
+    </div>
+</body>
+</html>
