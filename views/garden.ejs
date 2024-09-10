@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Open+Sans:wght@400&display=swap">
+    <title>Your Garden</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F7F2E7;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2E8B57;
+            margin-bottom: 20px;
+        }
+
+        .herb-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .herb-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: transform 0.2s;
+        }
+
+        .herb-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .herb-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .herb-card-content {
+            padding: 15px;
+        }
+
+        .herb-card-content h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #2E8B57;
+        }
+
+        .herb-card-content p {
+            font-size: 14px;
+            color: #555;
+            margin: 10px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Garden</h1>
+
+    <% if (bookmarkedHerbs.length === 0) { %>
+        <p>You have not bookmarked any herbs yet. Explore and add some herbs to your garden!</p>
+    <% } else { %>
+        <div class="herb-container">
+            <% bookmarkedHerbs.forEach(function(herb) { %>
+                <div class="herb-card">
+                    <img src="<%= herb.photo1 %>" alt="<%= herb.name %>">
+                    <div class="herb-card-content">
+                        <h2><%= herb.name %></h2>
+                        <p><%= herb.cure %></p>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    <% } %>
+</body>
+</html>

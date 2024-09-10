@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Open+Sans:wght@400&display=swap">
+    <title>Seasonal Herbs</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #F7F2E7;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2E8B57;
+            margin-bottom: 20px;
+        }
+
+        .herb-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .herb-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            transition: transform 0.2s;
+        }
+
+        .herb-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .herb-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .herb-card-content {
+            padding: 15px;
+        }
+
+        .herb-card-content h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #2E8B57;
+        }
+
+        .herb-card-content p {
+            font-size: 14px;
+            color: #555;
+            margin: 10px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Herbs for the Current Season: <span id="current-season"></span></h1>
+
+    <div id="no-herbs-message" style="display: none;">
+        <p>No herbs available for the current season.</p>
+    </div>
+
+    <div class="herb-container" id="herb-container">
+        <!-- Herbs will be populated here based on the current season -->
+    </div>
+
+    <script>
+        // Determine current season based on the current month
+        function getCurrentSeason() {
+            const month = new Date().getMonth() + 1; // JavaScript months are 0-11
+            if (month >= 3 && month <= 5) {
+                return 'Spring';
+            } else if (month >= 6 && month <= 8) {
+                return 'Summer';
+            } else if (month >= 9 && month <= 11) {
+                return 'Autumn';
+            } else {
+                return 'Winter'; // Default to winter if other months are encountered
+            }
+        }
+
+        // Fetch the current season
+        const currentSeason = getCurrentSeason();
+        document.getElementById('current-season').textContent = currentSeason;
+
+        // Filter herbs based on the current season
+        const herbs = <%- JSON.stringify(herbs) %>; // Pass herbs data from server-side
+
+        const filteredHerbs = herbs.filter(herb => herb.season === currentSeason);
+
+        // Display herbs or show a message if no herbs are found
+        const herbContainer = document.getElementById('herb-container');
+        const noHerbsMessage = document.getElementById('no-herbs-message');
+
+        if (filteredHerbs.length > 0) {
+            filteredHerbs.forEach(herb => {
+                const herbCard = document.createElement('div');
+                herbCard.className = 'herb-card';
+
+                herbCard.innerHTML = `
+                    <img src="${herb.photo1}" alt="${herb.name}">
+                    <div class="herb-card-content">
+                        <h2>${herb.name}</h2>
+                       
+                    </div>
+                `;
+
+                herbContainer.appendChild(herbCard);
+            });
+        } else {
+            noHerbsMessage.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

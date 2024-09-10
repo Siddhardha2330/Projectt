@@ -39,10 +39,6 @@
             gap: 30px;
         }
 
-        .navbar-links li {
-            display: inline;
-        }
-
         .navbar-links li a {
             color: #fff;
             text-decoration: none;
@@ -56,35 +52,6 @@
             background-color: #3CB371;
         }
 
-        .navbar-login .btn-login, .navbar-login .btn-signup {
-            color: #fff;
-            padding: 10px 20px;
-            margin-left: 10px;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .navbar-login .btn-login {
-            background-color: transparent;
-            border: 2px solid #fff;
-        }
-
-        .navbar-login .btn-login:hover {
-            background-color: #fff;
-            color: #2E8B57;
-        }
-
-        .navbar-login .btn-signup {
-            background-color: #E2C275;
-            border: 2px solid #E2C275;
-        }
-
-        .navbar-login .btn-signup:hover {
-            background-color: #fff;
-            color: #E2C275;
-        }
-
         /* Search Filter Styles */
         .search-filter {
             display: flex;
@@ -93,12 +60,27 @@
             gap: 20px;
         }
 
-        .search-filter input, .search-filter select {
+        .search-filter select, .search-filter input[type="text"] {
             padding: 12px;
             font-size: 16px;
             border: 2px solid #4B7F52;
             border-radius: 8px;
             width: 250px;
+        }
+
+        .search-filter input[type="submit"] {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2E8B57;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-filter input[type="submit"]:hover {
+            background-color: #3CB371;
         }
 
         /* Image Grid */
@@ -124,8 +106,6 @@
             object-fit: cover;
             transition: transform 0.3s;
         }
-
-        
 
         .image-block:hover {
             transform: translateY(-5px);
@@ -159,109 +139,103 @@
                 margin-top: 15px;
             }
 
-            .navbar-login {
-                margin-top: 10px;
-            }
-
             .image-block-container {
                 grid-template-columns: 1fr;
                 padding: 20px;
-            }
-
-            .search-filter {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .navbar {
-                padding: 15px;
-            }
-
-            .navbar-links li a {
-                font-size: 16px;
-            }
-
-            .search-filter input, .search-filter select {
-                width: 100%;
             }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <nav class="navbar">
-            <div class="navbar-logo">
-                <img src="c:\Users\dell\Downloads\logo-white.png" alt="Virtual Herbal Garden Logo">
-            </div>
-            <ul class="navbar-links">
-                <li><a href="/home">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/quiz">quiz</a></li>
-                <li><a href="/garden-plans">Garden Plans</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-            
-        </nav>
-    </header>
+<header>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <img src="c:\Users\dell\Downloads\logo-white.png" alt="Virtual Herbal Garden Logo">
+        </div>
+        <ul class="navbar-links">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/quiz">Quiz</a></li>
+            <li><a href="/garden">Garden Plans</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/season">Season</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <section class="search-filter">
-        <input type="text" id="search" placeholder="Search herbs...">
-        <select id="filter">
-            <option value="">Filter by Type</option>
-            <option value="medicinal">Medicinal</option>
-            <option value="culinary">Culinary</option>
-            <option value="aromatic">Aromatic</option>
-        </select>
-    </section>
+<section class="search-filter">
+    <!-- Search Bar Form -->
+    <form action="/search" method="GET" class="search-bar">
+        <input type="text" name="query" placeholder="Search herbs..." required>
+        <input type="submit" value="Search">
+    </form>
+</section>
 
-    <div class="image-block-container">
-        <% herbs.forEach(function(herb) { %>
-            <div class="image-block">
-                <h3><%= herb.name %></h3>
-                <a href="/herb/<%= herb.herb_id %>">
-                    <img src="<%= herb.photo1 %>" alt="<%= herb.name %>">
-                </a>
-            </div>
-        <% }); %>
-    </div>
+<section class="search-filter">
+    <select id="filter">
+        <option value="">Filter by Disease</option>
+        <option value="Indigestion">Indigestion</option>
+        <option value="Nausea">Nausea</option>
+        <option value="Arthritis">Arthritis</option>
+        <option value="Stress">Stress</option>
+        <option value="Burns">Burns</option>
+        <option value="Common Cold">Common Cold</option>
+        <option value="Flu">Flu</option>
+        <option value="Inflammation">Inflammation</option>
+        <option value="Depression">Depression</option>
+        <option value="Anxiety">Anxiety</option>
+        <option value="Fatigue">Fatigue</option>
+        <option value="Low Immunity">Low Immunity</option>
+        <option value="High Blood Pressure">High Blood Pressure</option>
+        <option value="Infections">Infections</option>
+        <option value="Skin Irritations">Skin Irritations</option>
+        <option value="Liver Disorders">Liver Disorders</option>
+        <option value="Detox">Detox</option>
+        <option value="Respiratory Infections">Respiratory Infections</option>
+        <option value="Coughs">Coughs</option>
+        <option value="Memory Loss">Memory Loss</option>
+        <option value="Muscle Pain">Muscle Pain</option>
+        <option value="Sleep Disorders">Sleep Disorders</option>
+        <option value="Digestive Issues">Digestive Issues</option>
+        <option value="Ulcers">Ulcers</option>
+        <option value="Insomnia">Insomnia</option>
+        
+    </select>
+</section>
 
-    <footer>
-        <p>&copy; 2024 Virtual Herbal Garden | Designed for Ayurvedic Well-being</p>
-    </footer>
+<div class="image-block-container" id="herb-container">
+    <% if (searchString) { %>
+        <h2>Results for "<%= searchString %>":</h2>
+    <% } %>
+    <% herbs.forEach(function(herb) { %>
+        <div class="image-block" data-cure="<%= herb.cure %>">
+            <h3><%= herb.name %></h3>
+            <a href="/herb/<%= herb.herb_id %>">
+                <img src="<%= herb.photo1 %>" alt="<%= herb.name %>">
+            </a>
+        </div>
+    <% }); %>
+</div>
 
-    <script>
-      // Search Filter Functionality
-      document.getElementById('search').addEventListener('input', function() {
-        let searchValue = this.value.toLowerCase();
-        let imageBlocks = document.querySelectorAll('.image-block');
+<footer>
+    <p>&copy; 2024 Virtual Herbal Garden | Designed for Ayurvedic Well-being</p>
+</footer>
 
-        imageBlocks.forEach(function(block) {
-            let altText = block.querySelector('img').alt.toLowerCase();
-            if (altText.includes(searchValue)) {
-                block.style.display = 'block';
-            } else {
-                block.style.display = 'none';
-            }
-        });
-    });
-
-    // Dropdown Filter Functionality
+<script>
     document.getElementById('filter').addEventListener('change', function() {
-        let filterValue = this.value.toLowerCase();
-        let imageBlocks = document.querySelectorAll('.image-block');
-
-        imageBlocks.forEach(function(block) {
-            let altText = block.querySelector('img').alt.toLowerCase();
-            if (filterValue === "" || altText.includes(filterValue)) {
-                block.style.display = 'block';
+        let filterValue = this.value
+        let herbs = document.querySelectorAll('.image-block');
+        
+        herbs.forEach(function(herb) {
+            let cure = herb.getAttribute('data-cure');
+            if (cure.includes(filterValue) || filterValue === "") {
+                herb.style.display = 'block';
             } else {
-                block.style.display = 'none';
+                herb.style.display = 'none';
             }
         });
     });
-    </script>
+</script>
 </body>
 </html>
