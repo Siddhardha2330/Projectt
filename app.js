@@ -23,6 +23,12 @@ app.get('/signup', (req, res) => {
 app.get('/quiz', (req, res) => {
   res.render('quiz');
 });
+app.get('/contact', (req, res) => {
+  res.render('contact');
+});
+app.get('/about', (req, res) => {
+  res.render('about');
+});
 // Handle signup form submission
 app.post('/signup', (req, res) => {
   const { name, email, password } = req.body;
