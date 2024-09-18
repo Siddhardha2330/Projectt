@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Open+Sans:wght@400&display=swap">
     <title>Virtual Herbal Garden</title>
     <style>
@@ -13,210 +14,240 @@
             padding: 0;
         }
 
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: #F7F2E7;
+            background: linear-gradient(to bottom, #E8F5E9, #F7F2E7);
             color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
         }
 
         /* Navbar Styles */
-        .navbar {
+        nav {
+            background-color: #3A5A40;
+            padding: 15px 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #2E8B57;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            
         }
 
-        .navbar-logo img {
-            width: 60px;
-        }
-
-        .navbar-links {
+        nav ul {
             display: flex;
             list-style: none;
-            gap: 30px;
+            margin: 0;
+            padding: 0;
         }
 
-        .navbar-links li a {
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
             color: #fff;
             text-decoration: none;
+            padding: 10px 15px;
             font-size: 18px;
-            padding: 10px 20px;
-            border-radius: 8px;
-            transition: background-color 0.3s;
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
         }
 
-        .navbar-links li a:hover {
-            background-color: #3CB371;
+        nav ul li a:hover {
+            background-color: #588157;
         }
 
         /* Search Filter Styles */
         .search-filter {
             display: flex;
             justify-content: center;
-            margin: 30px 0;
+            align-items: center;
             gap: 20px;
+            padding: 40px;
+            background-color: #DAD7CD;
+            border-radius: 12px;
+            margin: 30px auto;
+            max-width: 1200px;
         }
 
-        .search-filter select, .search-filter input[type="text"] {
-            padding: 12px;
+        .search-filter input, .search-filter select {
+            padding: 12px 18px;
             font-size: 16px;
             border: 2px solid #4B7F52;
-            border-radius: 8px;
+            border-radius: 12px;
             width: 250px;
         }
 
         .search-filter input[type="submit"] {
-            padding: 12px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            background-color: #2E8B57;
+            background-color: #3A5A40;
             color: #fff;
             cursor: pointer;
-            transition: background-color 0.3s;
+            border: none;
+            transition: background-color 0.3s ease;
         }
 
         .search-filter input[type="submit"]:hover {
-            background-color: #3CB371;
+            background-color: #588157;
         }
 
-        /* Image Grid */
+        /* Image Grid Styles */
         .image-block-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
             padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .image-block {
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
             background-color: #fff;
-            transition: transform 0.3s;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .image-block img {
             width: 100%;
-            height: 300px;
+            height: 250px;
             object-fit: cover;
-            transition: transform 0.3s;
+            border-radius: 10px;
+        }
+
+        .image-block h3 {
+            margin-top: 15px;
+            color: #3A5A40;
+            font-family: 'Lora', serif;
         }
 
         .image-block:hover {
-            transform: translateY(-5px);
-        }
-
-        .head {
-            font-family: 'Lora', serif;
-            font-size: 20px;
-            margin-top: 15px;
-            color: #2E8B57;
+            transform: translateY(-8px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
 
         /* Footer Styles */
         footer {
-            background-color: #2E8B57;
+            background-color: #3A5A40;
             color: white;
             text-align: center;
             padding: 20px;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 16px;
+            color: #fff;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .navbar {
+            nav ul {
                 flex-direction: column;
                 align-items: flex-start;
             }
 
-            .navbar-links {
+            .search-filter {
                 flex-direction: column;
                 gap: 15px;
-                margin-top: 15px;
             }
 
             .image-block-container {
                 grid-template-columns: 1fr;
-                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <nav class="navbar">
-        <div class="navbar-logo">
-            <img src="c:\Users\dell\Downloads\logo-white.png" alt="Virtual Herbal Garden Logo">
-        </div>
-        <ul class="navbar-links">
+
+    <nav>
+        <ul>
+            <li><strong style="color: white;">Virtual Herbal Garden</strong></li>
+        </ul>
+        <ul>
             <li><a href="/home">Home</a></li>
             <li><a href="/about">About Us</a></li>
             <li><a href="/quiz">Quiz</a></li>
             <li><a href="/garden">Garden Plans</a></li>
             <li><a href="/contact">Contact</a></li>
             <li><a href="/season">Season</a></li>
+            <li><a href="/logout" style="background-color: #d9534f; padding: 10px 15px; border-radius: 12px;">Logout</a></li> <!-- Logout Button -->
         </ul>
     </nav>
-</header>
 
-<section class="search-filter">
-    <!-- Search Bar Form -->
-    <form action="/search" method="GET" class="search-bar">
-        <input type="text" name="query" placeholder="Search herbs..." required>
-        <input type="submit" value="Search">
-    </form>
-</section>
 
-<section class="search-filter">
-    <select id="filter">
-        <option value="">Filter by Disease</option>
-        <option value="Indigestion">Indigestion</option>
-        <option value="Nausea">Nausea</option>
-        <option value="Arthritis">Arthritis</option>
-        <option value="Stress">Stress</option>
-        <option value="Burns">Burns</option>
-        <option value="Common Cold">Common Cold</option>
-        <option value="Flu">Flu</option>
-        <option value="Inflammation">Inflammation</option>
-        <option value="Depression">Depression</option>
-        <option value="Anxiety">Anxiety</option>
-        <option value="Fatigue">Fatigue</option>
-        <option value="Low Immunity">Low Immunity</option>
-        <option value="High Blood Pressure">High Blood Pressure</option>
-        <option value="Infections">Infections</option>
-        <option value="Skin Irritations">Skin Irritations</option>
-        <option value="Liver Disorders">Liver Disorders</option>
-        <option value="Detox">Detox</option>
-        <option value="Respiratory Infections">Respiratory Infections</option>
-        <option value="Coughs">Coughs</option>
-        <option value="Memory Loss">Memory Loss</option>
-        <option value="Muscle Pain">Muscle Pain</option>
-        <option value="Sleep Disorders">Sleep Disorders</option>
-        <option value="Digestive Issues">Digestive Issues</option>
-        <option value="Ulcers">Ulcers</option>
-        <option value="Insomnia">Insomnia</option>
-        
-    </select>
-</section>
+<main>
+    <section class="search-filter">
+        <!-- Search Bar Form -->
+        <form action="/search" method="GET">
+            <input type="text" name="query" placeholder="Search herbs..." required>
+            <input type="submit" value="Search" style="width: 70px;padding: 2px;font-size: 15px;">
+        </form>
+        <select id="filter" style="margin-bottom: 50px;">
+            <option value="">Filter by Disease</option>
+            <option value="Indigestion">Indigestion</option>
+            <option value="Nausea">Nausea</option>
+            <option value="Arthritis">Arthritis</option>
+            <option value="">Filter by Disease</option>
+            <option value="Indigestion">Indigestion</option>
+            <option value="Nausea">Nausea</option>
+            <option value="Arthritis">Arthritis</option>
+            <option value="Stress">Stress</option>
+            <option value="Burns">Burns</option>
+           
+            <option value="Flu">Flu</option>
+            <option value="Inflammation">Inflammation</option>
+            <option value="Depression">Depression</option>
+            <option value="Anxiety">Anxiety</option>
+            <option value="Fatigue">Fatigue</option>
+           
+            <option value="High Blood Pressure">High Blood Pressure</option>
+            <option value="Infections">Infections</option>
+           
+           
+            <option value="Detox">Detox</option>
+            
+            <option value="Coughs">Coughs</option>
+            
+            <option value="Ulcers">Ulcers</option>
+            <option value="Insomnia">Insomnia</option>
+            <!-- Add more filter options here -->
+        </select>
+    </section>
 
-<div class="image-block-container" id="herb-container">
-    <% if (searchString) { %>
-        <h2>Results for "<%= searchString %>":</h2>
-    <% } %>
-    <% herbs.forEach(function(herb) { %>
-        <div class="image-block" data-cure="<%= herb.cure %>">
-            <h3><%= herb.name %></h3>
-            <a href="/herb/<%= herb.herb_id %>">
-                <img src="<%= herb.photo1 %>" alt="<%= herb.name %>">
-            </a>
+    <section>
+        <div class="image-block-container" id="herb-container">
+            <% if (searchString) { %>
+                <h2 >Results for "<%= searchString %>":</h2>
+            <% } %>
+            <% herbs.forEach(function(herb) { %>
+                <div class="image-block" data-cure="<%= herb.cure %>">
+                    <h3><%= herb.name %></h3>
+                    <a href="/herb/<%= herb.herb_id %>">
+                        <img src="<%= herb.photo1 %>" alt="<%= herb.name %>">
+                    </a>
+                </div>
+            <% }); %>
         </div>
-    <% }); %>
-</div>
+    </section>
+</main>
+
 
 <footer>
     <p>&copy; 2024 Virtual Herbal Garden | Designed for Ayurvedic Well-being</p>
@@ -224,7 +255,7 @@
 
 <script>
     document.getElementById('filter').addEventListener('change', function() {
-        let filterValue = this.value
+        let filterValue = this.value;
         let herbs = document.querySelectorAll('.image-block');
         
         herbs.forEach(function(herb) {
@@ -237,5 +268,8 @@
         });
     });
 </script>
+
 </body>
 </html>
+
+            

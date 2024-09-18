@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            
         }
 
         h1 {
@@ -63,9 +64,54 @@
             color: #555;
             margin: 10px 0 0;
         }
+        nav {
+            background-color: #3A5A40;
+            padding: 15px 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #588157;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            }
+
     </style>
 </head>
 <body>
+    <%- include('header') %>
     <h1>Herbs for the Current Season: <span id="current-season"></span></h1>
 
     <div id="no-herbs-message" style="display: none;">
@@ -75,6 +121,7 @@
     <div class="herb-container" id="herb-container">
         <!-- Herbs will be populated here based on the current season -->
     </div>
+    <a href="/home" style="display: inline-block; padding: 12px 20px; background-color: #3A5A40; color: white; text-decoration: none; font-size: 16px; border-radius: 8px; transition: background-color 0.3s ease; margin: 20px 0; text-align: center;">Back to Home</a>
 
     <script>
         // Determine current season based on the current month

@@ -3,24 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Herbal Garden Quiz</title>
     <style>
+     
+
+       
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8f5;
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(to bottom, #E8F5E9, #F7F2E7);
+            color: #333;
+           align-items: center;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 400vh;
-            margin: 0;
+            flex-direction: column;
+           
         }
 
+        main {
+            flex: 1;
+        }
+
+        /* Navbar Styles */
+      
+     
+
+        /* Container Styling */
         .quiz-container {
             background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            max-width: 700px; /* Increased width */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
             width: 100%;
             animation: fadeIn 1s ease-in-out;
         }
@@ -30,16 +44,24 @@
             to { opacity: 1; transform: scale(1); }
         }
 
+        /* Header Styling */
         h1 {
-            color: #2e8b57;
+            color: #4b8f29; /* Herbal green */
             text-align: center;
+            font-size: 32px;
+            margin-bottom: 20px;
         }
 
+        /* Question Styling */
         .question {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 2px solid #c8e6c9; /* Green border */
+            border-radius: 8px;
+            background-color: #e8f5e9; /* Light background for questions */
             animation: slideIn 0.5s ease-out;
-            font-weight: bold; /* Bold text */
-            color: #4b0082; /* New color for questions */
+            font-weight: bold;
+            color: #2e7d32; /* Darker green for questions */
         }
 
         @keyframes slideIn {
@@ -47,24 +69,30 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
+        /* Button Styling */
         button {
-            background-color: #2e8b57;
+            background-color: #4b8f29; /* Herbal green */
             color: #fff;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 18px;
             cursor: pointer;
+            margin: 10px 0;
             transition: background-color 0.3s ease;
+            display: block;
+            width: 100%;
         }
 
         button:hover {
-            background-color: #276947;
+            background-color: #3a6f21; /* Darker green hover */
         }
 
+        /* Result Section Styling */
         .result {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #2e8b57;
+            margin-top: 30px;
+            font-size: 20px;
+            color: #4b8f29;
             text-align: center;
             animation: popUp 0.5s ease-out;
         }
@@ -74,18 +102,104 @@
             to { opacity: 1; transform: scale(1); }
         }
 
+        /* Explanation Text Styling */
+        .result p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+      
+
+        a:hover {
+            background-color: #2f4934;
+        }
+
+        /* Input Labels and Radio Buttons Styling */
+        label {
+            display: block;
+            margin: 8px 0;
+            font-size: 16px;
+            color: #2e7d32;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        /* Additional responsiveness for mobile */
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            button, a {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+        nav {
+            background-color: #3A5A40;
+            padding: 15px 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #588157;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            }
     </style>
 </head>
 <body>
+    
+    <%- include('header') %>
+   
+
     <div class="quiz-container">
         <h1>Herbal Garden Quiz</h1>
         <form id="quizForm"></form>
         <button type="button" onclick="submitQuiz()">Submit Quiz</button>
         <div id="result" class="result"></div>
-    </div>
+         </div>
 
-    <script>
-        const questions = [
+<script>
+    const questions = [
             { question: "What is often a separate space in a garden devoted to growing herbs called?", options: ["A: Vegetable bed", "B: Herb garden", "C: Flower patch", "D: Rock garden"], answer: "B", explanation: "A herb garden is a designated area in the garden specifically for growing herbs." },
             { question: "What is a common design pattern in elaborate herb gardens?", options: ["A: Spiral labyrinth", "B: Zigzag row", "C: Knot garden", "D: Circular maze"], answer: "C", explanation: "Knot gardens are specific patterns created by arranging and clipping herbs in detailed designs." },
             { question: "What is NOT a common use for herbs grown in a herb garden?", options: ["A: Culinary seasoning", "B: Pest control", "C: Providing shade", "D: Medicinal purposes"], answer: "C", explanation: "Herbs are typically used for culinary, medicinal, and pest control purposes, but not for providing shade." },
@@ -114,49 +228,53 @@
             { question: "Which herb is often used in both cooking and to repel insects?", options: ["A: Oregano", "B: Dill", "C: Basil", "D: Lemon balm"], answer: "D", explanation: "Lemon balm is versatile, used in cooking and known to repel insects like mosquitoes." },
         ];
 
-        function getRandomQuestions(questionsArray, num) {
-            const shuffled = [...questionsArray].sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, num);
-        }
 
-        const selectedQuestions = getRandomQuestions(questions, 15);
+    function getRandomQuestions(questionsArray, num) {
+        const shuffled = [...questionsArray].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, num);
+    }
 
-        const quizForm = document.getElementById('quizForm');
+    const selectedQuestions = getRandomQuestions(questions, 15);
+
+    const quizForm = document.getElementById('quizForm');
+    selectedQuestions.forEach((q, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question';
+        questionDiv.innerHTML = `
+            <p>${index + 1}. ${q.question}</p>
+            ${q.options.map((option, i) => `
+                <label>
+                    <input type="radio" name="question${index}" value="${option.charAt(0)}">
+                    ${option}
+                </label>
+                <br>
+            `).join('')}
+        `;
+        quizForm.appendChild(questionDiv);
+    });
+
+    function submitQuiz() {
+        let score = 0;
+        let explanations = '';
         selectedQuestions.forEach((q, index) => {
-            const questionDiv = document.createElement('div');
-            questionDiv.className = 'question';
-            questionDiv.innerHTML = `
-                <p>${index + 1}. ${q.question}</p>
-                ${q.options.map((option, i) => `
-                    <label>
-                        <input type="radio" name="question${index}" value="${option.charAt(0)}">
-                        ${option}
-                    </label>
-                    <br>
-                `).join('')}
-            `;
-            quizForm.appendChild(questionDiv);
+            const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+            if (selectedOption && selectedOption.value === q.answer) {
+                score++;
+            } else {
+                explanations += `<p>${index + 1}. ${q.question}<br>Correct Answer: ${q.answer}<br>${q.explanation}</p>`;
+            }
         });
 
-        function submitQuiz() {
-            let score = 0;
-            let explanations = '';
-            selectedQuestions.forEach((q, index) => {
-                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
-                if (selectedOption && selectedOption.value === q.answer) {
-                    score++;
-                } else {
-                    explanations += `<p>${index + 1}. ${q.question}<br>Correct Answer: ${q.answer}<br>${q.explanation}</p>`;
-                }
-            });
-
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = `
-                <p>Your score is ${score} out of ${selectedQuestions.length}.</p>
-                <h3>Explanations:</h3>
-                ${explanations}
-            `;
-        }
-    </script>
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `
+            <p>Your score is ${score} out of ${selectedQuestions.length}.</p>
+            <h3>Explanations:</h3>
+            ${explanations}
+        `;
+    }
+</script>
 </body>
 </html>
+
+       
+      

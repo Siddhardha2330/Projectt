@@ -134,22 +134,41 @@ app.get('/home', (req, res) => {
 // Serve the detailed herb page
 app.get('/herb/:id', (req, res) => {
   const herbId = req.params.id;
+  const userId = req.session.user ? req.session.user.id : null; // Ensure the user is logged in
 
-  const query = 'SELECT * FROM herbs WHERE herb_id = ?';
-  db.query(query, [herbId], (err, results) => {
-    if (err) {
-      console.error('Error fetching herb details:', err);
-      return res.status(500).send('Internal Server Error');
-    }
+  if (!userId) {
+      return res.redirect('/login'); // Redirect if user is not logged in
+  }
 
-    if (results.length === 0) {
-      return res.status(404).send('Herb not found');
-    }
+  // Fetch herb details
+  const herbQuery = 'SELECT * FROM herbs WHERE herb_id = ?';
+  db.query(herbQuery, [herbId], (err, herbResults) => {
+      if (err) {
+          console.error('Error fetching herb details:', err);
+          return res.status(500).send('Internal Server Error');
+      }
 
-    const herb = results[0];
-    res.render('page', { herb });
+      if (herbResults.length === 0) {
+          return res.status(404).send('Herb not found');
+      }
+
+      const herb = herbResults[0];
+
+      // Check if the herb is already bookmarked by the user
+      const bookmarkQuery = 'SELECT * FROM bookmark WHERE id = ? AND herb_id = ?';
+      db.query(bookmarkQuery, [userId, herbId], (err, bookmarkResults) => {
+          if (err) {
+              console.error('Error checking bookmark status:', err);
+              return res.status(500).send('Internal Server Error');
+          }
+
+          // Pass the bookmark status to the template
+          const isBookmarked = bookmarkResults.length > 0;
+          res.render('page', { herb, isBookmarked });
+      });
   });
 });
+
 
 // Bookmark a herb
 app.post('/bookmark', (req, res) => {
@@ -179,7 +198,7 @@ app.post('/bookmark', (req, res) => {
         console.error('Error bookmarking herb:', err);
         return res.status(500).send('Internal Server Error');
       }
-      res.redirect('/home'); // Redirect to a relevant page after bookmarking
+      res.redirect(`/herb/${herb_id}`); // Redirect to a relevant page after bookmarking
     });
   });
 });
@@ -256,7 +275,39 @@ app.get('/search', (req, res) => {
     res.render('home', { herbs: results, searchString });
   });
 });
+// Delete a bookmark
+app.post('/delete-bookmark', (req, res) => {
+  const { herb_id } = req.body;
+  const user_id = req.session.user ? req.session.user.id : null; // Ensure the user is logged in
 
+  if (!user_id) {
+      return res.status(401).send('You must be logged in to delete bookmarks.');
+  }
+
+  // Delete the bookmark from the database
+  const deleteQuery = 'DELETE FROM bookmark WHERE id = ? AND herb_id = ?';
+  db.query(deleteQuery, [user_id, herb_id], (err, results) => {
+      if (err) {
+          console.error('Error deleting bookmark:', err);
+          return res.status(500).send('Internal Server Error');
+      }
+
+      // Redirect back to the garden page after deletion
+      res.redirect('/garden');
+  });
+});
+app.get('/logout', (req, res) => {
+  // Destroy the session
+  req.session.destroy(err => {
+    if (err) {
+      console.log(err);
+      return res.redirect('/home');
+    }
+    // Clear cookie and redirect to login page or home
+    res.clearCookie('connect.sid'); // 'connect.sid' is the default cookie name for express-session
+    res.redirect('/login'); // Redirect to home or login page after logout
+  });
+});
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
